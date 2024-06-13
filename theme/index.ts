@@ -1,6 +1,6 @@
 // 1. import `extendTheme` function
 import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
-import { Inter, Unbounded } from "next/font/google";
+import { Urbanist } from "next/font/google";
 
 import { accordionTheme } from "./components/accordion";
 import { buttonTheme } from "./components/button";
@@ -16,12 +16,7 @@ import { tabsTheme } from "./components/tabs";
 import { tagTheme } from "./components/tag";
 import { textTheme } from "./components/text";
 
-const unbounded = Unbounded({
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const inter = Inter({
+const urbanist = Urbanist({
   subsets: ["latin"],
   display: "swap",
 });
@@ -35,25 +30,22 @@ const config: ThemeConfig = {
 // 3. extend the theme
 const theme = extendTheme({
   fonts: {
-    heading: `Inter, 'Unbounded Variable', sans-serif`,
-    body: `Inter, 'Unbounded Variable', sans-serif`,
-    "Unbounded Variable": unbounded.style.fontFamily,
-    Inter: inter.style.fontFamily,
+    heading: `${urbanist.style.fontFamily}`,
+    body: `${urbanist.style.fontFamily}`,
   },
   config,
   colors: {
     brand: {
-      "10": "#F1EFFD",
-      "50": "#c3bde7",
-      "100": "#a198d9",
-      "200": "#9085d2",
-      "300": "#7f72cb",
-      "400": "#6e60c4",
-      "500": "#5141B0",
-      "600": "#40338b",
-      "700": "#372c78",
-      "800": "#2f2566",
-      "900": "#1e1840",
+      "50": "#34CAA5",
+      "100": "#34CAA5",
+      "200": "#34CAA5",
+      "300": "#34CAA5",
+      "400": "#34CAA5",
+      "500": "#34CAA5",
+      "600": "#34CAA5",
+      "700": "#34CAA5",
+      "800": "#34CAA5",
+      "900": "#34CAA5",
     },
     secondary: {
       "50": "#ffffff",
@@ -67,18 +59,7 @@ const theme = extendTheme({
       "800": "#a294f2",
       "900": "#7a67ec",
     },
-    black: {
-      "50": "#595959",
-      "100": "#404040",
-      "200": "#333333",
-      "300": "#262626",
-      "400": "#1a1a1a",
-      "500": "#090909",
-      "600": "#111111",
-      "700": "#000000",
-      "800": "#000000",
-      "900": "#000000",
-    },
+    black: "#111827",
     grey: {
       "50": "#6a7282",
       "100": "#535a66",
@@ -91,14 +72,7 @@ const theme = extendTheme({
       "800": "#000000",
       "900": "#000000",
     },
-    base: {
-      "15": "rgba(255, 255, 255, 0.15)",
-      "40": "rgba(0, 0, 0, 0.4)",
-      "50": "#7A7D82",
-      "60": "#4F5153",
-      "80": "#F6F6F6",
-      "100": "#000000",
-    },
+
     warning: {
       "50": "#fef2d2",
       "100": "#fde3a0",

@@ -1,21 +1,15 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Inter, Unbounded } from "next/font/google";
+import { Urbanist } from "next/font/google";
 import { Suspense } from "react";
 
 import Providers from "./providers";
 
-const unbounded = Unbounded({
+const urbanist = Urbanist({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-unbounded",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
+  variable: "--font-urbanist",
 });
 
 export const metadata: Metadata = {
@@ -29,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${unbounded.variable}`}>
+    <html lang="en" className={`${urbanist.variable}`}>
       <body>
         <Suspense fallback={null}>
           <Providers>{children}</Providers>

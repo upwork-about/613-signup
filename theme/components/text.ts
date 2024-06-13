@@ -5,7 +5,6 @@ const h1Variant = defineStyle((props) => {
   const { colorScheme: c } = props;
   return {
     fontWeight: "semibold",
-    fontFamily: "Unbounded Variable",
     color: c ? c["500"] : "#000",
     fontSize: [32, 36, 48],
   };
@@ -14,7 +13,6 @@ const h2Variant = defineStyle((props) => {
   const { colorScheme: c } = props;
   return {
     fontWeight: "semibold",
-    fontFamily: "Unbounded Variable",
     color: c ? c["500"] : "#000",
     fontSize: "30px",
   };
