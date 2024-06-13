@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Box, Container, Flex, Input, Text, Button, Radio } from "@chakra-ui/react";
-import { SignupContext } from "@/app/page";
+import { SignupContext } from "./constant";
 const StepEmail: React.FC = () => {
   const { step, setStep } = useContext(SignupContext);
   return (

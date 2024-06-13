@@ -12,7 +12,7 @@ import {
   PinInput,
   PinInputField,
 } from "@chakra-ui/react";
-import { SignupContext } from "@/app/page";
+import { SignupContext } from "./constant";
 const StepCode: React.FC = () => {
   const { step, setStep } = useContext(SignupContext);
   return (

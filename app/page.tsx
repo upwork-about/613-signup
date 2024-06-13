@@ -6,13 +6,7 @@ import { useContext } from "react";
 import StepEmail from "@/components/modules/signup/StepEmail";
 import StepCode from "@/components/modules/signup/StepCode";
 import StepAssistant from "@/components/modules/signup/StepAssistant";
-type stepProps = 0 | 1 | 2;
-type SignupType = {
-  step: stepProps;
-  setStep: (value: stepProps) => void;
-};
-
-export const SignupContext = createContext<SignupType>({ step: 0, setStep: (value: stepProps) => {} });
+import { SignupContext } from "@/components/modules/signup/constant";
 
 export default function Home() {
   const [step, setStep] = useState<0 | 1 | 2>(0);
