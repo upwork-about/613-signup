@@ -13,7 +13,7 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: "Stable++",
+  title: "Signup",
   description: "Built on RGB++. Powered by Nervos. For the Bitcoin Ecosystem.",
 };
 

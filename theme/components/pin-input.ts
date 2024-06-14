@@ -14,7 +14,7 @@ const baseStyle = defineStyle({
 
 const variants = {
   filled: defineStyle(
-    (props) =>
+    () =>
       runIfFn(
         defineStyle(() => {
           return {
@@ -35,8 +35,7 @@ const variants = {
               },
             },
           };
-        }),
-        props
+        })
       )?.field ?? {}
   ),
 };
