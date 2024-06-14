@@ -31,13 +31,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Container>
-        <Box>
-          <Text>My</Text>
-          <Text>ko</Text>
-        </Box>
+      <Container maxW="lg">
+        <Flex sx={{ pt: 4 }}>
+          <Text variant={"h2"} color="black.900">
+            My
+          </Text>
+          <Text variant={"h2"} color="brand.900">
+            ko
+          </Text>
+        </Flex>
         <SignupContext.Provider value={{ step, setStep }}>
-          <Container>{stepDom}</Container>
+          <Box sx={{ pt: ["60px", "100px", "140px"] }}>{stepDom}</Box>
         </SignupContext.Provider>
       </Container>
     </>

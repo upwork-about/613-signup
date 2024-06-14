@@ -4,27 +4,25 @@ import { defineStyle, defineStyleConfig } from "@chakra-ui/styled-system";
 const h1Variant = defineStyle((props) => {
   const { colorScheme: c } = props;
   return {
-    fontWeight: "semibold",
-    color: c ? c["500"] : "#000",
-    fontSize: [32, 36, 48],
+    fontWeight: "800",
+    color: "black.900",
+    fontSize: [24, 32, 40],
   };
 });
 const h2Variant = defineStyle((props) => {
-  const { colorScheme: c } = props;
   return {
     fontWeight: "semibold",
-    color: c ? c["500"] : "#000",
-    fontSize: "30px",
+    color: "black.900",
+    fontSize: ["20px", "28px"],
   };
 });
 
 // Defining a custom variant
 const p1Variant = defineStyle((props) => {
-  const { colorScheme: c } = props;
   return {
     fontWeight: "400",
-    color: c ? c["500"] : "#000",
-    fontSize: "16px",
+    color: "black.900",
+    fontSize: ["12px", "16px"],
   };
 });
 const pageLinkVariant = defineStyle(() => {

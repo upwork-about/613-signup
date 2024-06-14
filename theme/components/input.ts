@@ -24,100 +24,37 @@ const baseStyle = definePartsStyle({
   },
 });
 
-const variantOutline = definePartsStyle(() => {
-  return {
-    field: {
-      fontFamily: "Inter", // change font family to mono
-      // _focus: {
-      //   borderColor: "brand.500",
-      // },
-    },
-  };
-});
-
 const variantFilled = definePartsStyle(() => {
   return {
     field: {
       fontWeight: "semibold", // change font weight to semibold
-    },
-  };
-});
-
-// Defining a custom variant
-const variantCustom = definePartsStyle((props) => {
-  const { colorScheme: c } = props;
-  return {
-    field: {
-      border: "0px solid",
-      bg: "brand.500",
-      borderTopRightRadius: "full",
-      borderBottomRightRadius: "full",
-      _dark: {
-        bg: "whiteAlpha.50",
+      bg: "secondary.500",
+      _placeholder: {
+        color: "secondary.900",
       },
-
       _hover: {
-        bg: "gray.200",
-        _dark: {
-          bg: "whiteAlpha.100",
-        },
+        borderColor: "brand.200",
       },
-      _readOnly: {
-        boxShadow: "none !important",
-        userSelect: "all",
-      },
-      _focusVisible: {
-        bg: "gray.200",
 
-        _dark: {
-          bg: "whiteAlpha.100",
-        },
-      },
-    },
-    addon: {
-      border: "0px solid",
-      borderColor: "transparent",
-      borderTopLeftRadius: "full",
-      borderBottomLeftRadius: "full",
-      bg: `${c}.500`,
-      color: "white",
-      _dark: {
-        bg: `${c}.300`,
-        color: `${c}.900`,
-      },
-    },
-    element: {
-      bg: "white",
-      rounded: "full",
-      border: "1px solid",
-      borderColor: "gray.100",
-      _dark: {
-        bg: "whiteAlpha.50",
-        borderColor: "whiteAlpha.100",
+      _focusVisible: {
+        borderColor: "brand.200",
       },
     },
   };
 });
 
 const variants = {
-  outline: variantOutline,
   filled: variantFilled,
-  custom: variantCustom,
-};
-
-const size = {
-  md: defineStyle({
-    fontSize: "sm",
-    px: "4",
-    h: "10",
-    borderRadius: "8px",
-  }),
 };
 
 const sizes = {
-  md: definePartsStyle({
-    field: size.md,
-    addon: size.md,
+  xl: definePartsStyle({
+    field: {
+      fontSize: ["md", "lg"],
+      px: "4",
+      h: [10, 12, 14],
+      borderRadius: "8px",
+    },
   }),
 };
 
@@ -126,7 +63,7 @@ export const inputTheme = defineMultiStyleConfig({
   variants,
   sizes,
   defaultProps: {
-    size: "md",
-    variant: "outline",
+    size: "xl",
+    variant: "filled",
   },
 });

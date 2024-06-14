@@ -5,11 +5,15 @@ const baseStyle = defineStyle({
   fontWeight: "500", // change the font weight to normal
   width: "100%",
   color: "white",
+  height: "56px",
 });
 
 const sizes = {
-  md: defineStyle({
-    fontSize: "md", // Change font size to sm (14px)
+  xl: defineStyle({
+    fontWeight: "700",
+    px: "6",
+    fontSize: ["md", "lg", "xl"],
+    h: [10, 12, 14],
   }),
 };
 

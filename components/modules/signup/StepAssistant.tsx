@@ -1,32 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Container, Flex, Input, Text, Button, Radio } from "@chakra-ui/react";
-const StepEmail: React.FC = () => {
+import { SignupContext } from "./constant";
+const StepAssistant: React.FC = () => {
+  const { step, setStep } = useContext(SignupContext);
   return (
-    <Container>
-      <Box>
-        <Text>My</Text>
-        <Text>ko</Text>
-      </Box>
-      <Container>
+    <Box>
+      <Flex sx={{ alignItems: "center", gap: 3, color: "secondary.900", cursor: "pointer" }} onClick={() => setStep(1)}>
+        <ArrowBackIcon></ArrowBackIcon>
+        <Text variant={"p1"} color="secondary.900">
+          Back
+        </Text>
+      </Flex>
+      <Box sx={{ mt: 10 }}>
+        <Text variant={"h1"} color="brand.900">
+          Almost Done!
+        </Text>
         <Box>
-          <Text>Almost Done!</Text>
-          <Box>
-            <Text>Set Up Your Virtual</Text>
-            <Text>{`Assistant's Email`}</Text>
-          </Box>
+          <Text variant={"h1"}>Set Up Your Virtual</Text>
+          <Text variant={"h1"}>{`Assistant's Email`}</Text>
         </Box>
-        <Flex>
-          <Input placeholder="large size" size="lg" />
-          <Text>
-            <Text>@myko</Text>
-            <Text>assistant</Text>
-            <Text>.com</Text>
-          </Text>
-        </Flex>
+      </Box>
+      <Flex sx={{ alignItems: "center", gap: 3, mt: 10 }}>
+        <Input sx={{ flex: 1 }} variant={"filled"} placeholder="Assistant Name" size="lg" />
+        <Text variant={"p1"} sx={{ flex: 1, fontWeight: "700", display: "inline-flex" }}>
+          <Text color="brand.900">@myko</Text>
+          <Text color="warning.900">assistant</Text>
+          <Text>.com</Text>
+        </Text>
+      </Flex>
 
-        <Button colorScheme="brand">Done</Button>
-      </Container>
-    </Container>
+      <Button sx={{ mt: 8 }} size="xl" colorScheme="brand">
+        Done
+      </Button>
+    </Box>
   );
 };
-export default StepEmail;
+export default StepAssistant;

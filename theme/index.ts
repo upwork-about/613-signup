@@ -1,5 +1,5 @@
 // 1. import `extendTheme` function
-import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
+import { Checkbox, PinInput, extendTheme, type ThemeConfig } from "@chakra-ui/react";
 import { Urbanist } from "next/font/google";
 
 import { accordionTheme } from "./components/accordion";
@@ -15,6 +15,8 @@ import { tableTheme } from "./components/table";
 import { tabsTheme } from "./components/tabs";
 import { tagTheme } from "./components/tag";
 import { textTheme } from "./components/text";
+import { checkboxTheme } from "./components/checkbox";
+import { pinInputTheme } from "./components/pin-input";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -53,13 +55,25 @@ const theme = extendTheme({
       "200": "#ffffff",
       "300": "#ffffff",
       "400": "#ffffff",
-      "500": "#F1EFFD",
-      "600": "#c9c2f7",
+      "500": "#FAFAFA",
+      "600": "#F5F5F5",
       "700": "#b5abf5",
       "800": "#a294f2",
-      "900": "#7a67ec",
+      "900": "#747681",
     },
-    black: "#111827",
+    black: {
+      "50": "#111827",
+      "100": "#111827",
+      "200": "#111827",
+      "300": "#111827",
+      "400": "#111827",
+      "500": "#111827",
+      "600": "#111827",
+      "700": "#111827",
+      "800": "#111827",
+      "900": "#111827",
+    },
+
     grey: {
       "50": "#6a7282",
       "100": "#535a66",
@@ -83,7 +97,7 @@ const theme = extendTheme({
       "600": "#e7a604",
       "700": "#ce9404",
       "800": "#b58203",
-      "900": "#835e02",
+      "900": "#FFC047",
     },
     info: "#3ABFF8",
     error: "#F87272",
@@ -113,6 +127,8 @@ const theme = extendTheme({
     Code: codeTheme,
     Tag: tagTheme,
     Table: tableTheme,
+    Checkbox: checkboxTheme,
+    PinInput: pinInputTheme,
   },
 });
 
