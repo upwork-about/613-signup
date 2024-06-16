@@ -13,7 +13,7 @@ export default function Home() {
   const [form, setForm] = useState({
     email: "",
     code: "",
-    assistantName: "",
+    name: "",
   });
 
   const stragety = {
@@ -40,7 +40,7 @@ export default function Home() {
             ko
           </Text>
         </Flex>
-        <SignupContext.Provider value={{ step, setStep }}>
+        <SignupContext.Provider value={{ step, setStep, form, setForm }}>
           <Box sx={{ pt: ["60px", "100px", "140px"] }}>{stepDom}</Box>
         </SignupContext.Provider>
       </Container>

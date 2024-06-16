@@ -11,7 +11,7 @@ const h1Variant = defineStyle((props) => {
 });
 const h2Variant = defineStyle((props) => {
   return {
-    fontWeight: "semibold",
+    fontWeight: "800",
     color: "black.900",
     fontSize: ["20px", "28px"],
   };

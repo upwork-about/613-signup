@@ -1,9 +1,27 @@
 import React, { useContext, useState } from "react";
-import { Box, Container, Flex, Input, Text, Button, Checkbox } from "@chakra-ui/react";
-import { SignupContext } from "./constant";
+import { Box, Container, Flex, Input, Text, Button, Checkbox, FormControl, FormErrorMessage } from "@chakra-ui/react";
+import { SignupContext, isValidEmail } from "./constant";
+import { Field, Form, Formik } from "formik";
 const StepEmail: React.FC = () => {
-  const { step, setStep } = useContext(SignupContext);
+  const { step, setStep, form, setForm } = useContext(SignupContext);
   const [isCheck, setIsCheck] = useState(false);
+
+  const validateEmail = (value: string) => {
+    let error;
+    if (!value) {
+      error = "Email is required";
+    } else if (!isValidEmail(value)) {
+      error = "Incorrect email format";
+    }
+    return error;
+  };
+  const validateRadio = (value: string) => {
+    let error;
+    if (!value) {
+      error = "please agree the terms";
+    }
+    return error;
+  };
   return (
     <Box>
       <Box>
@@ -17,27 +35,49 @@ const StepEmail: React.FC = () => {
           </Text>
         </Flex>
       </Box>
-      <Input sx={{ mt: 10 }} variant="filled" placeholder="Email" />
-      <Button sx={{ mt: 8 }} colorScheme="brand" size="xl" onClick={() => setStep(1)}>
-        Next
-      </Button>
-      <Flex sx={{ mt: 3, alignItems: "center" }}>
-        <Checkbox
-          size={["md", "lg"]}
-          colorScheme="brand"
-          isChecked={isCheck}
-          onChange={(e) => {
-            console.log(e.target.checked);
-            setIsCheck(e.target.checked);
-          }}
-        >
-          <Text variant="p1">By proceeding, you agree to the</Text>
-        </Checkbox>
+      <Formik
+        initialValues={{ email: form.email, radio: false }}
+        onSubmit={(values, actions) => {
+          console.log(1235);
+          setTimeout(() => {
+            setForm({ ...form, ...values });
+            setStep(1);
+          }, 1000);
+        }}
+      >
+        {(props) => (
+          <Form>
+            <Field name="email" validate={validateEmail}>
+              {({ field, form }: any) => (
+                <FormControl isInvalid={form.errors.email && form.touched.email}>
+                  <Input {...field} sx={{ mt: 10 }} variant="filled" placeholder="Email" />
+                  <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
 
-        <Text variant={"p1"} sx={{ color: "brand.500", fontWeight: "500", ml: 2 }}>
-          Terms and Conditions
-        </Text>
-      </Flex>
+            <Button sx={{ mt: 8 }} colorScheme="brand" size="xl" isLoading={props.isSubmitting} type="submit">
+              Next
+            </Button>
+            <Field name="radio" validate={validateRadio}>
+              {({ field, form }: any) => (
+                <FormControl sx={{ mt: 4 }} isInvalid={form.errors.radio && form.touched.radio}>
+                  <Checkbox {...field} size={["md", "lg"]} colorScheme="brand">
+                    <Flex>
+                      <Text variant="p1">By proceeding, you agree to the</Text>
+                      <Text variant={"p1"} sx={{ color: "brand.500", fontWeight: "500", ml: 2 }}>
+                        Terms and Conditions
+                      </Text>
+                    </Flex>
+                  </Checkbox>
+                  <FormErrorMessage>{form.errors.radio}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+          </Form>
+        )}
+      </Formik>
+
       <Flex sx={{ mt: 10, alignItems: "center" }}>
         <Text variant={"p1"} sx={{ color: "secondary.900" }}>
           Already have an account?

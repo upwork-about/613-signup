@@ -1,9 +1,18 @@
 import React, { useContext } from "react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Box, Container, Flex, Input, Text, Button, Radio } from "@chakra-ui/react";
+import { Box, useToast, Flex, Input, Text, Button, FormControl, FormErrorMessage } from "@chakra-ui/react";
 import { SignupContext } from "./constant";
+import { Field, Form, Formik } from "formik";
 const StepAssistant: React.FC = () => {
-  const { step, setStep } = useContext(SignupContext);
+  const { step, setStep, form, setForm } = useContext(SignupContext);
+  const toast = useToast();
+  const validateName = (value: string) => {
+    let error;
+    if (!value) {
+      error = "please Input the Name";
+    }
+    return error;
+  };
   return (
     <Box>
       <Flex sx={{ alignItems: "center", gap: 3, color: "secondary.900", cursor: "pointer" }} onClick={() => setStep(1)}>
@@ -21,18 +30,47 @@ const StepAssistant: React.FC = () => {
           <Text variant={"h1"}>{`Assistant's Email`}</Text>
         </Box>
       </Box>
-      <Flex sx={{ alignItems: "center", gap: 3, mt: 10 }}>
-        <Input sx={{ flex: 1 }} variant={"filled"} placeholder="Assistant Name" size="lg" />
-        <Text variant={"p1"} sx={{ flex: 1, fontWeight: "700", display: "inline-flex" }}>
-          <Text color="brand.900">@myko</Text>
-          <Text color="warning.900">assistant</Text>
-          <Text>.com</Text>
-        </Text>
-      </Flex>
 
-      <Button sx={{ mt: 8 }} size="xl" colorScheme="brand">
-        Done
-      </Button>
+      <Formik
+        initialValues={{ name: "" }}
+        onSubmit={(values, actions) => {
+          console.log(1235, values);
+          setForm({ ...form, ...values });
+          setTimeout(() => {
+            toast({
+              title: "Success",
+              description: JSON.stringify(form, null, 2),
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          }, 1000);
+        }}
+      >
+        {(props) => (
+          <Form>
+            <Field name="name" validate={validateName}>
+              {({ field, form: formikForm }: any) => (
+                <FormControl isInvalid={formikForm.errors.name && formikForm.touched.name}>
+                  <Flex sx={{ alignItems: "center", gap: 3, mt: 10 }}>
+                    <Input {...field} sx={{ flex: 1 }} variant={"filled"} placeholder="Assistant Name" size="lg" />
+                    <Text variant={"p1"} sx={{ flex: 1, fontWeight: "700", display: "inline-flex" }}>
+                      <Text color="brand.900">@myko</Text>
+                      <Text color="warning.900">assistant</Text>
+                      <Text>.com</Text>
+                    </Text>
+                  </Flex>
+                  <FormErrorMessage>{formikForm.errors.name}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
+            <Button sx={{ mt: 8 }} colorScheme="brand" size="xl" isLoading={props.isSubmitting} type="submit">
+              Done
+            </Button>
+          </Form>
+        )}
+      </Formik>
     </Box>
   );
 };
