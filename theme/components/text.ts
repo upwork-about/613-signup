@@ -13,7 +13,7 @@ const h2Variant = defineStyle((props) => {
   return {
     fontWeight: "800",
     color: "black.900",
-    fontSize: ["20px", "28px"],
+    fontSize: ["20px", "28px", "32px"],
   };
 });
 
@@ -23,6 +23,14 @@ const p1Variant = defineStyle((props) => {
     fontWeight: "400",
     color: "black.900",
     fontSize: ["12px", "16px"],
+  };
+});
+// Defining a custom variant
+const p2Variant = defineStyle((props) => {
+  return {
+    fontWeight: "400",
+    color: "black.600",
+    fontSize: "12px",
   };
 });
 const pageLinkVariant = defineStyle(() => {
@@ -44,6 +52,7 @@ export const textTheme = defineStyleConfig({
     h1: h1Variant,
     h2: h2Variant,
     p1: p1Variant,
+    p2: p2Variant,
     pageLink: pageLinkVariant,
   },
   defaultProps: {},

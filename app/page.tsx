@@ -7,6 +7,7 @@ import StepEmail from "@/components/modules/signup/StepEmail";
 import StepCode from "@/components/modules/signup/StepCode";
 import StepAssistant from "@/components/modules/signup/StepAssistant";
 import { SignupContext } from "@/components/modules/signup/constant";
+import LandingPage from "@/components/modules/signup/LandingPage";
 
 export default function Home() {
   const [step, setStep] = useState<0 | 1 | 2>(0);
@@ -31,19 +32,29 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Container maxW="lg">
-        <Flex sx={{ pt: 4 }}>
-          <Text variant={"h2"} color="black.900">
-            My
-          </Text>
-          <Text variant={"h2"} color="brand.900">
-            ko
-          </Text>
+      <SignupContext.Provider value={{ step, setStep, form, setForm }}>
+        <Flex sx={{ flexDirection: ["column", "column", "row"], h: "100vh" }}>
+          <Box sx={{ width: "50%" }}>
+            <Container maxW="xl">
+              <Flex sx={{ pt: 4 }}>
+                <Text variant={"h2"} color="black.900">
+                  My
+                </Text>
+                <Text variant={"h2"} color="brand.800">
+                  ko
+                </Text>
+              </Flex>
+
+              <Box sx={{ pt: ["60px", "100px", "140px"] }}>{stepDom}</Box>
+            </Container>
+          </Box>
+          <Box sx={{ width: "50%", bg: "black" }}>
+            <Container maxW="640px">
+              <LandingPage></LandingPage>
+            </Container>
+          </Box>
         </Flex>
-        <SignupContext.Provider value={{ step, setStep, form, setForm }}>
-          <Box sx={{ pt: ["60px", "100px", "140px"] }}>{stepDom}</Box>
-        </SignupContext.Provider>
-      </Container>
+      </SignupContext.Provider>
     </>
   );
 }
