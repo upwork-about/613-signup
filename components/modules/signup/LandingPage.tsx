@@ -32,7 +32,7 @@ const list = [
     title: "Alice Johnson",
     label: ["Vice President of Sales", "FutureTech Solutions"],
     img: "/img/avatar-2.png",
-    distance: "-60px",
+    distance: ["-20px", "-30px", "-40px", "-60px"],
   },
   {
     title: "Jane Doe",
@@ -41,7 +41,7 @@ const list = [
     phone: "(555) 123-4567",
     email: "jane.doe@innovators.com",
     isVer: true,
-    distance: "70px",
+    distance: ["20px", "30px", "40px", "70px"],
   },
 ];
 const StepEmail: React.FC = () => {
@@ -57,7 +57,7 @@ const StepEmail: React.FC = () => {
               <Flex
                 key={item.title}
                 sx={{
-                  w: 400,
+                  w: ["80%", "80%", "80%", 400],
                   bg: "white",
                   px: 6,
                   py: 3,
@@ -108,7 +108,7 @@ const StepEmail: React.FC = () => {
             sx={{ position: "absolute", top: "-40px", left: "30px", w: "40px", h: "43px" }}
           ></Image>
 
-          <Box sx={{ position: "absolute", right: 0, bottom: -100, w: "190px" }}>
+          <Box sx={{ position: "absolute", right: 0, bottom: [-160, -140, -120, -100], w: "190px" }}>
             <Box sx={{ bg: "grey.900", borderRadius: "10px", p: 4, position: "relative" }}>
               <Flex sx={{ gap: 2 }}>
                 <Image src="/img/icon-email.png" alt="" sx={{ w: "18px", h: "18px" }} />

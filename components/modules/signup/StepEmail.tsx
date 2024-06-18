@@ -1,10 +1,24 @@
 import React, { useContext, useState } from "react";
-import { Box, Container, Flex, Input, Text, Button, Checkbox, FormControl, FormErrorMessage } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Input,
+  Text,
+  Button,
+  Checkbox,
+  FormControl,
+  FormErrorMessage,
+  useToast,
+} from "@chakra-ui/react";
 import { SignupContext, isValidEmail } from "./constant";
 import { Field, Form, Formik } from "formik";
+import { useSignup } from "@/hooks/useSignup";
 const StepEmail: React.FC = () => {
   const { step, setStep, form, setForm } = useContext(SignupContext);
   const [isCheck, setIsCheck] = useState(false);
+  const { postIsEmailRegister, postSendVerificationEmail } = useSignup();
+  const toast = useToast();
 
   const validateEmail = (value: string) => {
     let error;
@@ -37,12 +51,36 @@ const StepEmail: React.FC = () => {
       </Box>
       <Formik
         initialValues={{ email: form.email, radio: false }}
-        onSubmit={(values, actions) => {
-          console.log(1235);
-          setTimeout(() => {
-            setForm({ ...form, ...values });
-            setStep(1);
-          }, 1000);
+        onSubmit={async (values, actions) => {
+          const res = await postIsEmailRegister(values.email);
+          if (!res.is_registered) {
+            console.log(res, "res");
+            const resCode = await postSendVerificationEmail(values.email);
+            if (resCode.verification_code_id) {
+              setForm({ ...form, ...values, codeId: resCode.verification_code_id });
+              setStep(1);
+              toast({
+                title: "The verification code has been sent to your email address, please check",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+              });
+            } else {
+              toast({
+                title: "Sorry, an unknown error caused the verification code to be unable to be sent.",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+              });
+            }
+          } else {
+            toast({
+              title: "sorry, the current email has been registered",
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+            });
+          }
         }}
       >
         {(props) => (

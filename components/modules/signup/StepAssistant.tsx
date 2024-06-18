@@ -3,8 +3,10 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, useToast, Flex, Input, Text, Button, FormControl, FormErrorMessage } from "@chakra-ui/react";
 import { SignupContext } from "./constant";
 import { Field, Form, Formik } from "formik";
+import { useSignup } from "@/hooks/useSignup";
 const StepAssistant: React.FC = () => {
   const { step, setStep, form, setForm } = useContext(SignupContext);
+  const { postSignUp, postIsAssistantEmailPicked } = useSignup();
   const toast = useToast();
   const validateName = (value: string) => {
     let error;
@@ -33,18 +35,40 @@ const StepAssistant: React.FC = () => {
 
       <Formik
         initialValues={{ name: "" }}
-        onSubmit={(values, actions) => {
+        onSubmit={async (values, actions) => {
           console.log(1235, values);
-          setForm({ ...form, ...values });
-          setTimeout(() => {
+          const isPickedRes = await postIsAssistantEmailPicked(values.name);
+          if (isPickedRes.is_picked) {
             toast({
-              title: "Success",
-              description: JSON.stringify(form, null, 2),
-              status: "success",
-              duration: 9000,
+              title: "The current assistant email address has been selected",
+              status: "error",
+              duration: 3000,
               isClosable: true,
             });
-          }, 1000);
+          }
+          const res = await postSignUp({
+            email: form.email,
+            assistant_email: values.name + "@mykoassistant.com",
+            verification_code_id: form.codeId,
+            verification_code: form.code,
+          });
+          console.log(res);
+          if (!res) {
+            setForm({ ...form, ...values });
+            toast({
+              title: "Success Register",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              title: res.detail,
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+            });
+          }
         }}
       >
         {(props) => (

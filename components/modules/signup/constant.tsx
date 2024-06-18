@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 type stepProps = 0 | 1 | 2;
-type formProps = { name: string; email: string; code: string };
+type formProps = { name: string; email: string; code: string; codeId: string };
 type SignupType = {
   step: stepProps;
   setStep: (value: stepProps) => void;
@@ -12,7 +12,7 @@ type SignupType = {
 export const SignupContext = createContext<SignupType>({
   step: 0,
   setStep: (value: stepProps) => {},
-  form: { name: "", email: "", code: "" },
+  form: { name: "", email: "", code: "", codeId: "" },
   setForm: (value: formProps) => {},
 });
 

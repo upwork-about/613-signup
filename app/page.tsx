@@ -15,6 +15,7 @@ export default function Home() {
     email: "",
     code: "",
     name: "",
+    codeId: "",
   });
 
   const stragety = {
@@ -33,9 +34,9 @@ export default function Home() {
       </Head>
 
       <SignupContext.Provider value={{ step, setStep, form, setForm }}>
-        <Flex sx={{ flexDirection: ["column", "column", "row"], h: "100vh" }}>
-          <Box sx={{ width: "50%" }}>
-            <Container maxW="xl">
+        <Flex sx={{ flexDirection: ["column", "column", "column", "row"], minH: "100vh" }}>
+          <Box sx={{ w: ["100%", "100%", "100%", "50%"] }}>
+            <Container maxW="xl" sx={{ pb: "100px" }}>
               <Flex sx={{ pt: 4 }}>
                 <Text variant={"h2"} color="black.900">
                   My
@@ -48,7 +49,7 @@ export default function Home() {
               <Box sx={{ pt: ["60px", "100px", "140px"] }}>{stepDom}</Box>
             </Container>
           </Box>
-          <Box sx={{ width: "50%", bg: "black" }}>
+          <Box sx={{ w: ["100%", "100%", "100%", "50%"], bg: "black" }}>
             <Container maxW="640px">
               <LandingPage></LandingPage>
             </Container>

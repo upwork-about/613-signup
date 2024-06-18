@@ -12,11 +12,15 @@ import {
   HStack,
   PinInput,
   PinInputField,
+  useToast,
 } from "@chakra-ui/react";
 import { SignupContext } from "./constant";
 import { Field, Form, Formik } from "formik";
+import { useSignup } from "@/hooks/useSignup";
 const StepCode: React.FC = () => {
   const { step, setStep, form, setForm } = useContext(SignupContext);
+  const { postVerifyEmail } = useSignup();
+  const toast = useToast();
   const validateCode = (value: string) => {
     let error;
     if (!value) {
@@ -42,12 +46,32 @@ const StepCode: React.FC = () => {
       </Box>
       <Formik
         initialValues={{ code: "" }}
-        onSubmit={(values, actions) => {
+        onSubmit={async (values, actions) => {
           console.log(1235);
-          setTimeout(() => {
+
+          const res = await postVerifyEmail({
+            email: form.email,
+            verification_code_id: form.codeId,
+            verification_code: values.code,
+          });
+          if (!res) {
+            console.log(res, "res");
+            toast({
+              title: "Verification Success",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+            });
             setForm({ ...form, ...values });
             setStep(2);
-          }, 1000);
+          } else {
+            toast({
+              title: "sorry, the current email has been registered",
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+            });
+          }
         }}
       >
         {(props) => (
@@ -81,7 +105,24 @@ const StepCode: React.FC = () => {
               )}
             </Field>
 
-            <Text sx={{ mt: 8, fontWeight: "700", cursor: "pointer" }} variant="p1" color="brand.900">
+            <Text
+              sx={{ mt: 8, fontWeight: "700", cursor: "pointer" }}
+              variant="p1"
+              color="brand.900"
+              onClick={async () => {
+                console.log(123);
+                const resCode = await postSendVerificationEmail(form.email);
+                if (resCode.verification_code_id) {
+                  setForm({ ...form, codeId: resCode.verification_code_id });
+                  toast({
+                    title: "The verification code has been sent to your email address, please check",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true,
+                  });
+                }
+              }}
+            >
               Send the code again
             </Text>
             <Button sx={{ mt: 8 }} colorScheme="brand" size="xl" isLoading={props.isSubmitting} type="submit">
