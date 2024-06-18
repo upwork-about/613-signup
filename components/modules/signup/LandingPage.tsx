@@ -49,15 +49,15 @@ const StepEmail: React.FC = () => {
   const [isCheck, setIsCheck] = useState(false);
 
   return (
-    <Box>
-      <Box sx={{ pt: 200 }}>
+    <Box sx={{ h: "100%" }}>
+      <Box sx={{ h: "60%", pt: "20%" }}>
         <Flex sx={{ flexDirection: "column", alignItems: "center", gap: 3, position: "relative" }}>
           {list.map((item) => {
             return (
               <Flex
                 key={item.title}
                 sx={{
-                  w: ["80%", "80%", "80%", 400],
+                  w: "70%",
                   bg: "white",
                   px: 6,
                   py: 3,
@@ -145,7 +145,7 @@ const StepEmail: React.FC = () => {
           </Box>
         </Flex>
       </Box>
-      <Box sx={{ mt: 200 }}>
+      <Box sx={{ h: "40%", overflow: "hidden" }}>
         <Swiper
           slidesPerView={1}
           spaceBetween={30}

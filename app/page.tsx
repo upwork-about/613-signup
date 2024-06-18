@@ -34,7 +34,7 @@ export default function Home() {
       </Head>
 
       <SignupContext.Provider value={{ step, setStep, form, setForm }}>
-        <Flex sx={{ flexDirection: ["column", "column", "column", "row"], minH: "100vh" }}>
+        <Flex sx={{ flexDirection: ["column", "column", "column", "row"], h: "100vh", overflow: "hidden" }}>
           <Box sx={{ w: ["100%", "100%", "100%", "50%"] }}>
             <Container maxW="xl" sx={{ pb: "100px" }}>
               <Flex sx={{ pt: 4 }}>
@@ -46,11 +46,11 @@ export default function Home() {
                 </Text>
               </Flex>
 
-              <Box sx={{ pt: ["60px", "100px", "140px"] }}>{stepDom}</Box>
+              <Box sx={{ pt: ["20%", "20%", "20%"] }}>{stepDom}</Box>
             </Container>
           </Box>
-          <Box sx={{ w: ["100%", "100%", "100%", "50%"], bg: "black" }}>
-            <Container maxW="640px">
+          <Box sx={{ w: ["100%", "100%", "100%", "50%"], bg: "black", h: "100%" }}>
+            <Container maxW="640px" sx={{ h: "100%" }}>
               <LandingPage></LandingPage>
             </Container>
           </Box>

@@ -6,14 +6,14 @@ const h1Variant = defineStyle((props) => {
   return {
     fontWeight: "800",
     color: "black.900",
-    fontSize: [24, 32, 40],
+    fontSize: ["1.5rem", "2rem", "2.5rem"],
   };
 });
 const h2Variant = defineStyle((props) => {
   return {
     fontWeight: "800",
     color: "black.900",
-    fontSize: ["20px", "28px", "32px"],
+    fontSize: ["1.25rem", "28px", "32px"],
   };
 });
 
