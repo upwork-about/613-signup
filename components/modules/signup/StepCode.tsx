@@ -19,7 +19,7 @@ import { Field, Form, Formik } from "formik";
 import { useSignup } from "@/hooks/useSignup";
 const StepCode: React.FC = () => {
   const { step, setStep, form, setForm } = useContext(SignupContext);
-  const { postVerifyEmail } = useSignup();
+  const { postVerifyEmail, postSendVerificationEmail } = useSignup();
   const toast = useToast();
   const validateCode = (value: string) => {
     let error;
@@ -41,7 +41,7 @@ const StepCode: React.FC = () => {
       <Box sx={{ mt: 10 }}>
         <Text variant={"h1"}>Enter Verification Code</Text>
         <Text sx={{ mt: 4 }} variant={"p1"} color="secondary.900">
-          We have just sent a verification code to tynisha*****@mail.com
+          We have just sent a verification code to {form.email}
         </Text>
       </Box>
       <Formik
