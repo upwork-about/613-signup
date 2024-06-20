@@ -1,9 +1,11 @@
+import { useToast } from "@chakra-ui/react";
+
 const headers = {
   "Content-Type": "application/vnd.api+json",
   Accept: "application/vnd.api+json",
 };
 
-const baseUrl = "https://agents-production-function-app.azurewebsites.net";
+const baseUrl = "https://agents-myko-api-production-app.azurewebsites.net";
 
 const urlList = {
   health_check: "/api/myko/health_check/health_check",
@@ -19,32 +21,47 @@ type fetchParamsProps = {
   method?: "GET" | "POST";
   params?: any;
 };
-const fetcher = async (fetchParams: fetchParamsProps) => {
+const fetcher = async (fetchParams: fetchParamsProps, toast: any) => {
   const url_ = baseUrl + fetchParams.url;
-  const res = await fetch(url_, {
-    method: fetchParams.method || "POST",
-    headers,
-    body: JSON.stringify(fetchParams.params),
-  });
 
-  return res.json();
+  try {
+    const res = await fetch(url_, {
+      method: fetchParams.method || "POST",
+      headers,
+      body: JSON.stringify(fetchParams.params),
+    });
+    console.log(res, "res");
+    if (res.status !== 200) {
+      toast({
+        title: "The current web interface is temporarily unavailable. Please try again later.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    return res.json();
+  } catch (error) {
+    console.log(error, "error");
+  }
 };
 
 export const useSignup = () => {
+  const toast = useToast();
   const getHealthCheck = async () => {
-    const res = await fetcher({ url: urlList.health_check, method: "GET" });
+    const res = await fetcher({ url: urlList.health_check, method: "GET" }, toast);
     return res;
   };
   const postIsEmailRegister = async (email: string) => {
-    const res = await fetcher({ url: urlList.is_email_registered, params: { email } });
+    const res = await fetcher({ url: urlList.is_email_registered, params: { email } }, toast);
     return res;
   };
   const postIsAssistantEmailPicked = async (email: string) => {
-    const res = await fetcher({ url: urlList.is_assistant_email_picked, params: { assistant_email: email } });
+    const res = await fetcher({ url: urlList.is_assistant_email_picked, params: { assistant_email: email } }, toast);
     return res;
   };
   const postSendVerificationEmail = async (email: string) => {
-    const res = await fetcher({ url: urlList.send_verification_email, params: { email } });
+    const res = await fetcher({ url: urlList.send_verification_email, params: { email } }, toast);
     return res;
   };
   const postVerifyEmail = async (params: {
@@ -52,7 +69,7 @@ export const useSignup = () => {
     verification_code_id: string;
     verification_code: string;
   }) => {
-    const res = await fetcher({ url: urlList.verify_email, params });
+    const res = await fetcher({ url: urlList.verify_email, params }, toast);
     return res;
   };
   const postSignUp = async (params: {
@@ -61,7 +78,7 @@ export const useSignup = () => {
     verification_code_id: string;
     verification_code: string;
   }) => {
-    const res = await fetcher({ url: urlList.sign_up, params });
+    const res = await fetcher({ url: urlList.sign_up, params }, toast);
     return res;
   };
   return {
